@@ -24,17 +24,17 @@ target_link_libraries(disparity-daisy ${OpenCV_LIBS})
 add_executable(disparity-elas ${LIBELAS_SRC_FILES} disparity-elas.cpp)
 target_link_libraries(disparity-elas ${OpenCV_LIBS})
 
-add_executable(epipolar epipolar.cpp popt_pp.h)
-target_link_libraries(epipolar ${OpenCV_LIBS} "-lpopt")
+add_executable(epipolar epipolar.cpp cxxopts/cxxopts.hpp)
+target_link_libraries(epipolar ${OpenCV_LIBS})
 
-add_executable(disparity disparity.cpp popt_pp.h)
-target_link_libraries(disparity ${OpenCV_LIBS} "-lpopt")
+add_executable(disparity disparity.cpp cxxopts/cxxopts.hpp)
+target_link_libraries(disparity ${OpenCV_LIBS})
 
-add_executable(disparity-lbp disparity-lbp.cpp popt_pp.h)
-target_link_libraries(disparity-lbp ${OpenCV_LIBS} "-lpopt")
+add_executable(disparity-lbp disparity-lbp.cpp cxxopts/cxxopts.hpp)
+target_link_libraries(disparity-lbp ${OpenCV_LIBS})
 
-add_executable(disparity-orb disparity-orb.cpp popt_pp.h)
-target_link_libraries(disparity-orb ${OpenCV_LIBS} "-lpopt")
+add_executable(disparity-orb disparity-orb.cpp cxxopts/cxxopts.hpp)
+target_link_libraries(disparity-orb ${OpenCV_LIBS})
 
-add_executable(reconstruct reconstruct.cpp popt_pp.h)
-target_link_libraries(reconstruct ${OpenCV_LIBS} "-lpopt")
+add_executable(reconstruct reconstruct.cpp cxxopts/cxxopts.hpp)
+target_link_libraries(reconstruct ${OpenCV_LIBS})
