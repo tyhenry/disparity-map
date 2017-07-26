@@ -4,7 +4,7 @@ project(DISPARITY_MAP)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(OpenCV REQUIRED)
-include_directories($(OpenCV_INCLUDE_DIRS))
+include_directories(${OpenCV_INCLUDE_DIRS})
 
 set(LIBELAS_SRC_DIR elas)
 set(DAISY_DESC_INC_DIR ./daisy_descriptor/include)
@@ -38,3 +38,6 @@ target_link_libraries(disparity-orb ${OpenCV_LIBS})
 
 add_executable(reconstruct reconstruct.cpp cxxopts/cxxopts.hpp)
 target_link_libraries(reconstruct ${OpenCV_LIBS})
+
+add_executable(disparity-bm disparity-bm.cpp cxxopts/cxxopts.hpp)
+target_link_libraries(disparity-bm ${OpenCV_LIBS})
