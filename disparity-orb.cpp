@@ -125,10 +125,12 @@ int getCorresPointLeft(Point p, int ndisp) {
 }
 
 void computeDisparityMapORB(int ndisp) {
+  double t = (double)getTickCount(); // timing
+
   img_disp = Mat(img_left.rows, img_left.cols, CV_8UC1, Scalar(0));
   for (int i = ndisp+1; i < img_left.cols; i++) {
     for (int j = 0; j < img_left.rows; j++) {
-      cout << i << ", " << j << endl;
+      //cout << i << ", " << j << endl;
       if (!isLeftKeyPoint(i,j))
         continue;
       int right_i = getCorresPointRight(Point(i,j), ndisp);
@@ -142,19 +144,23 @@ void computeDisparityMapORB(int ndisp) {
       img_disp.at<uchar>(j,i) = disparity;
     }
   }
+
+  t = ((double)getTickCount() - t)/getTickFrequency();
+  cout << "computed disparity map (ORB) in " << t << " seconds" << endl;
 }
 
 void cacheDescriptorVals() {
-  OrbDescriptorExtractor extractor;
+  //OrbDescriptorExtractor extractor;
   //BriefDescriptorExtractor extractor;
+  auto extractor = ORB::create();
   for (int i = 0; i < img_left.cols; i++) {
     for (int j = 0; j < img_left.rows; j++) {
       kpl.push_back(KeyPoint(i,j,1));
       kpr.push_back(KeyPoint(i,j,1));
     }
   }
-  extractor.compute(img_left, kpl, img_left_desc);
-  extractor.compute(img_right, kpr, img_right_desc);
+  extractor->compute(img_left, kpl, img_left_desc);
+  extractor->compute(img_right, kpr, img_right_desc);
 }
 
 void preprocess(Mat& img) {
